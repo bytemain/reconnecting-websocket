@@ -24,6 +24,11 @@ export type Event = Events.Event;
 export type ErrorEvent = Events.ErrorEvent;
 export type CloseEvent = Events.CloseEvent;
 
+export type IRWLogger = {
+    log: (message: string, ...args: any[]) => void;
+    error: (message: string, ...args: any[]) => void;
+};
+
 export type Options = {
     WebSocket?: any;
     WebSocketOptions?: any | {};
@@ -36,6 +41,7 @@ export type Options = {
     maxEnqueuedMessages?: number;
     startClosed?: boolean;
     debug?: boolean;
+    logger?: IRWLogger;
 };
 
 const DEFAULT = {
@@ -82,6 +88,8 @@ export default class ReconnectingWebSocket {
     private readonly _protocols?: string | string[];
     private readonly _options: Options;
 
+    private readonly _logger: IRWLogger;
+
     constructor(url: UrlProvider, protocols?: string | string[], options: Options = {}) {
         this._url = url;
         this._protocols = protocols;
@@ -89,6 +97,12 @@ export default class ReconnectingWebSocket {
         if (this._options.startClosed) {
             this._shouldReconnect = false;
         }
+        if (options.logger) {
+            this._logger = options.logger;
+        } else {
+            this._logger = console;
+        }
+
         this._connect();
     }
 
@@ -301,11 +315,10 @@ export default class ReconnectingWebSocket {
     }
 
     private _debug(...args: any[]) {
-        if (this._options.debug) {
-            // not using spread because compiled version uses Symbols
-            // tslint:disable-next-line
-            console.log.apply(console, ['RWS>', ...args]);
+        if (!this._debug) {
+            return;
         }
+        this._logger.log('RWS>', ...args);
     }
 
     private _getNextDelay() {
@@ -383,8 +396,8 @@ export default class ReconnectingWebSocket {
                 }
                 this._debug('connect', {url, protocols: this._protocols, options: this._options});
                 this._ws = this._protocols
-                ? new WebSocket(url, this._protocols, this._options.WebSocketOptions)
-                : new WebSocket(url, this._options.WebSocketOptions);
+                    ? new WebSocket(url, this._protocols, this._options.WebSocketOptions)
+                    : new WebSocket(url, this._options.WebSocketOptions);
                 this._ws!.binaryType = this._binaryType;
                 this._connectLock = false;
                 this._addListeners();
@@ -393,8 +406,8 @@ export default class ReconnectingWebSocket {
             })
             .catch(err => {
                 this._connectLock = false;
-                this._handleError(new Events.ErrorEvent(Error(err.message), this))
-            })
+                this._handleError(new Events.ErrorEvent(Error(err.message), this));
+            });
     }
 
     private _handleTimeout() {
