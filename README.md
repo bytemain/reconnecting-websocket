@@ -1,8 +1,5 @@
 # Reconnecting WebSocket
 
-[![Build Status](https://travis-ci.org/pladaria/reconnecting-websocket.svg?branch=master&v=1)](https://travis-ci.org/pladaria/reconnecting-websocket)
-[![Coverage Status](https://coveralls.io/repos/github/pladaria/reconnecting-websocket/badge.svg?branch=master&v=3)](https://coveralls.io/github/pladaria/reconnecting-websocket?branch=master)
-
 WebSocket that will automatically reconnect if the connection is closed.
 
 ## Features
@@ -20,7 +17,7 @@ WebSocket that will automatically reconnect if the connection is closed.
 ## Install
 
 ```bash
-npm install --save reconnecting-websocket
+npm install --save @bytemain/reconnecting-websocket
 ```
 
 ## Usage
@@ -36,7 +33,7 @@ request :)
 ### Simple usage
 
 ```javascript
-import ReconnectingWebSocket from 'reconnecting-websocket';
+import ReconnectingWebSocket from '@bytemain/reconnecting-websocket';
 
 const rws = new ReconnectingWebSocket('ws://my.site.com');
 
@@ -54,7 +51,7 @@ The `url` parameter will be resolved before connecting, possible types:
 -   `() => Promise<string>`
 
 ```javascript
-import ReconnectingWebSocket from 'reconnecting-websocket';
+import ReconnectingWebSocket from '@bytemain/reconnecting-websocket';
 
 const urls = ['ws://my.site.com', 'ws://your.site.com', 'ws://their.site.com'];
 let urlIndex = 0;
@@ -66,7 +63,7 @@ const rws = new ReconnectingWebSocket(urlProvider);
 ```
 
 ```javascript
-import ReconnectingWebSocket from 'reconnecting-websocket';
+import ReconnectingWebSocket from '@bytemain/reconnecting-websocket';
 
 // async url provider
 const urlProvider = async () => {
@@ -82,7 +79,7 @@ const rws = new ReconnectingWebSocket(urlProvider);
 #### Sample with custom options
 
 ```javascript
-import ReconnectingWebSocket from 'reconnecting-websocket';
+import ReconnectingWebSocket from '@bytemain/reconnecting-websocket';
 import WS from 'ws';
 
 const options = {
@@ -177,3 +174,9 @@ CLOSED     3 The connection is closed or couldn't be opened.
 ## License
 
 MIT
+
+This project was forked from [pladaria/reconnecting-websocket](https://github.com/pladaria/reconnecting-websocket).
+
+Because it seems that the original project is no longer maintained, I decided to fork it and continue to maintain it.
+
+Thanks all original contributors for their work.

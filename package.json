@@ -1,5 +1,5 @@
 {
-    "name": "reconnecting-websocket",
+    "name": "@bytemain/reconnecting-websocket",
     "version": "4.4.0",
     "description": "Reconnecting WebSocket",
     "main": "./dist/reconnecting-websocket-cjs.js",
@@ -25,7 +25,7 @@
         "forever",
         "automatic"
     ],
-    "author": "Pedro Ladaria <pedro.ladaria@gmail.com>",
+    "author": "bytemain <artin@cat.ms>",
     "files": [
         "dist/*"
     ],
@@ -58,15 +58,15 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/pladaria/reconnecting-websocket.git"
+        "url": "git+https://github.com/bytemain/reconnecting-websocket.git"
     },
     "bugs": {
-        "url": "https://github.com/pladaria/reconnecting-websocket/issues"
+        "url": "https://github.com/bytemain/reconnecting-websocket/issues"
     },
     "publishConfig": {
         "registry": "https://registry.npmjs.org"
     },
-    "homepage": "https://github.com/pladaria/reconnecting-websocket#readme",
+    "homepage": "https://github.com/bytemain/reconnecting-websocket#readme",
     "lint-staged": {
         "linters": {
             "*.{js,md,ts}": [
