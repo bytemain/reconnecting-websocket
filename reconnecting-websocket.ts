@@ -315,7 +315,7 @@ export default class ReconnectingWebSocket {
     }
 
     private _debug(...args: any[]) {
-        if (!this._debug) {
+        if (!this._options.debug) {
             return;
         }
         this._logger.log('RWS>', ...args);
