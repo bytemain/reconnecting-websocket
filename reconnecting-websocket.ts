@@ -2,7 +2,7 @@
  * Reconnecting WebSocket
  * by Pedro Ladaria <pedro.ladaria@gmail.com>
  * https://github.com/pladaria/reconnecting-websocket
- * https://github.com/bytemain/reconnecting-websocket
+ * https://github.com/opensumi/reconnecting-websocket
  * License MIT
  */
 

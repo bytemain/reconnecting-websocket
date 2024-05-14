@@ -17,7 +17,7 @@ WebSocket that will automatically reconnect if the connection is closed.
 ## Install
 
 ```bash
-npm install --save @bytemain/reconnecting-websocket
+npm install --save @opensumi/reconnecting-websocket
 ```
 
 ## Usage
@@ -33,7 +33,7 @@ request :)
 ### Simple usage
 
 ```javascript
-import ReconnectingWebSocket from '@bytemain/reconnecting-websocket';
+import ReconnectingWebSocket from '@opensumi/reconnecting-websocket';
 
 const rws = new ReconnectingWebSocket('ws://my.site.com');
 
@@ -51,7 +51,7 @@ The `url` parameter will be resolved before connecting, possible types:
 -   `() => Promise<string>`
 
 ```javascript
-import ReconnectingWebSocket from '@bytemain/reconnecting-websocket';
+import ReconnectingWebSocket from '@opensumi/reconnecting-websocket';
 
 const urls = ['ws://my.site.com', 'ws://your.site.com', 'ws://their.site.com'];
 let urlIndex = 0;
@@ -63,7 +63,7 @@ const rws = new ReconnectingWebSocket(urlProvider);
 ```
 
 ```javascript
-import ReconnectingWebSocket from '@bytemain/reconnecting-websocket';
+import ReconnectingWebSocket from '@opensumi/reconnecting-websocket';
 
 // async url provider
 const urlProvider = async () => {
@@ -79,7 +79,7 @@ const rws = new ReconnectingWebSocket(urlProvider);
 #### Sample with custom options
 
 ```javascript
-import ReconnectingWebSocket from '@bytemain/reconnecting-websocket';
+import ReconnectingWebSocket from '@opensumi/reconnecting-websocket';
 import WS from 'ws';
 
 const options = {
@@ -175,8 +175,10 @@ CLOSED     3 The connection is closed or couldn't be opened.
 
 MIT
 
-This project was forked from [pladaria/reconnecting-websocket](https://github.com/pladaria/reconnecting-websocket).
+This project was forked from
+[pladaria/reconnecting-websocket](https://github.com/pladaria/reconnecting-websocket).
 
-Because it seems that the original project is no longer maintained, I decided to fork it and continue to maintain it.
+Because it seems that the original project is no longer maintained, I decided to fork it and
+continue to maintain it.
 
 Thanks all original contributors for their work.
