@@ -235,15 +235,7 @@ export default class ReconnectingWebSocket {
         this._closeCalled = true;
         this._shouldReconnect = false;
         this._clearTimeouts();
-        if (!this._ws) {
-            this._debug('close enqueued: no ws instance');
-            return;
-        }
-        if (this._ws.readyState === this.CLOSED) {
-            this._debug('close: already closed');
-            return;
-        }
-        this._ws.close(code, reason);
+        this._safeClose(code, reason);
     }
 
     /**
@@ -422,11 +414,27 @@ export default class ReconnectingWebSocket {
         }
         this._removeListeners();
         try {
-            this._ws.close(code, reason);
+            this._safeClose(code, reason);
             this._handleClose(new Events.CloseEvent(code, reason, this));
         } catch (error) {
             // ignore
         }
+    }
+
+    private _safeClose(code: number, reason?: string) {
+        if (!this._ws) {
+            this._debug('close enqueued: no ws instance');
+            return;
+        }
+        if (this._ws.readyState === this.CLOSING) {
+            this._debug('close enqueued: already closing');
+            return;
+        }
+        if (this._ws.readyState === this.CLOSED) {
+            this._debug('close: already closed');
+            return;
+        }
+        this._ws.close(code, reason);
     }
 
     private _acceptOpen() {
